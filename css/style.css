@@ -1,0 +1,18 @@
+body {
+  background-image: url("");
+	text-align:center
+}
+#dailydiv{
+	float:left;
+	border-radius:5px;
+	margin:10px;
+	padding:10px;
+	background-color:gray;
+	color:white;
+	opacity: 0.9;
+	width:23%
+}
+#dailydiv:hover{
+	background-color:white;
+	color:black;
+}

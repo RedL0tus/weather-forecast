@@ -1,162 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-    background-image: url("");
-	text-align:center
-}
-#dailydiv{
-	float:left;
-	border-radius:5px;
-	margin:10px;
-	padding:10px;
-	background-color:gray;
-	color:white;
-	opacity: 0.9;
-	width:23%
-}
-#dailydiv:hover{
-	background-color:white;
-	color:black;
-}
-.jumbotron{
-background-image: url("http://i.imgur.com/qJbDQNI.gif");
- background-size: 100% 155%;
-}
-</style>
+	<head>
+		<meta charset="utf-8">
+		<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta name="renderer" content="webkit">
+  	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+		<title>Open Weather Map</title>
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- MDUI -->
+		<script src="js/mdui.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="css/mdui.min.css" />
+		<!-- Weather -->
+		<script src="js/weather.js" type="text/JavaScript"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjAOoKj4Df_lqdhnJpzoud53V5x09vy8c"></script>
+	</head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
+	<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink" onload="showWeather()">
+		<header class="mdui-appbar mdui-appbar-fixed">
+			<div class="mdui-toolbar mdui-color-theme">
+				<span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span>
+				<i class="mdui-icon material-icons">&#xe2bd;</i>
+				<a href="./" class="mdui-typo-title">Open Weather Map</a>
+			</div>
+		</header>
 
-function showWeather(){
-	var location =document.getElementById("location").value
-	var key="&appid=8eefe0f1bea8271fbe52facfda36ee3a";
-	current(location,key);
-	daily(location,key);
-}
-function current(location,key){
-	$.getJSON("http://api.openweathermap.org/data/2.5/weather?units=metric&q="+location+key, function(data){
-		var name=data.name;
-		var coordsLat=data.coord.lat
-		var coordsLon=data.coord.lon;
-		var icon=data.weather[0].icon;//http://openweathermap.org/img/w/10d.png
-		var descr=data.weather[0].description;
-		var temp=data.main.temp;
-		var humidity=data.main.humidity;
-		var windSpeed=data.wind.speed;
-
-		var build = "";
-		build += "<div id='current'>";
-		build += "<h3>"+name+ " ( " +coordsLat+ " , " +coordsLon+ " )</h3>";
-		build += "<img src='http://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
-		build += "<p>";
-		build += "Description:"+descr+"<br>";	
-		build += "Tempture:"+temp+" deg C<br>";
-		build += "Humidity:"+humidity+" %</br>";
-		build += "Wind speed:"+windSpeed+" mph</br>";
-		build +="</p>"
-		build += "</div>";
-
-		document.getElementById("current").innerHTML = build;
-		myMap(coordsLat,coordsLon)
-	});
-}
-function daily(location,key){ 
-	var cnt = parseInt(document.getElementById("cnt").value);
-	$.getJSON("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt="+cnt+"&q="+location+key, function(data){
-		console.log(data);
-		var build = "";
-		for(var i=0; i<data.list.length; i++){
-			var icon=data.list[i].weather[0].icon;//http://openweathermap.org/img/w/10d.png
-			var descr=data.list[i].weather[0].description;
-			var temp=data.list[i].temp.day;
-			var d=new Date(data.list[i].dt*1000);
-			var weekday = new Array(7);
-			weekday[0] = "Sunday";
-			weekday[1] = "Monday";
-			weekday[2] = "Tuesday";
-			weekday[3] = "Wednesday";
-			weekday[4] = "Thursday";
-			weekday[5] = "Friday";
-			weekday[6] = "Saturday";
-			build += "<div id='dailydiv'>";
-			build += "<h3>Day: "+(i+1)+"</h3>";
-			build+= "Date: "+(d.getMonth()+1)+" / "+ d.getDate()+ " / "+d.getFullYear()+" "+weekday[d.getDay()];
-			build += "<img src='http://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
-			build += "<p>";
-			build += "Description:"+descr+"<br>";	
-			build += "Tempture:"+temp+" deg C<br>";
-			build +="</p>"
-			build += "</div>";
-		}
-		document.getElementById("daily").innerHTML = build;
-	});
-}
-function myMap(coordsLat,coordsLon) {
-var mapProp= {
-    center:new google.maps.LatLng(coordsLat,coordsLon),
-    zoom:12,
-};
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-document.getElementById("googleMap").style.height="300px";
-}
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjAOoKj4Df_lqdhnJpzoud53V5x09vy8c"></script>
-</head>
-
-
-
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Open Weather Map</a>
-    </div>
-    <form class="navbar-form navbar-left">
-      <div class="form-group">
-      <label style="color:white">location:</label>
-      <input type="text" class="form-control" id="location" placeholder="Enter City" value="Bayside,ny">
-    </div>
-    <div class="form-group">
-      <label style="color:white">Days:</label>
-      <input type="text" class="form-control" id="cnt" placeholder="Enter # 1-16" value="7">
-    </div>
-	 <button type="button" class="btn btn-default" onclick="showWeather()">Get Weather data</button>
-    </form>
-  </div>
-</nav>
-
-<div class="container">
-	<div class="jumbotron" >
-		<h1>Weather</h1>      
-	</div>
-</div>	
-<div class="row" style="margin:10px">
-	<div class="col-sm-4" >
-		<div class="panel panel-primary">
-			<div class="panel-heading"><h2>Current weather</h2></div>
-			<div class="panel-body" id="current"></div>
+		<div class="mdui-drawer" id="main-drawer">
+  		<div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+    		<div class="mdui-collapse-item mdui-list-item-active">
+      		<div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+						<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe2bd;</i>
+        		<div class="mdui-list-item-content">Weather</div>
+					</div>
+      	</div>
+			</div>
 		</div>
-	</div>
-	<div class="col-sm-8" >
-		<div class="panel panel-primary">
-			<div class="panel-heading" ><h2>Google Map</h2></div>
-			<div class="panel-body" id="googleMap"></div>
-		</div>
-	</div>
-	<div class="col-sm-12">
-		<div class="panel panel-info">
-			<div class="panel-heading" ><h2>Daily Weather Forecast</h2></div>
-			<div class="panel-body" id="daily"></div>
-		</div>
-	</div>
-</div>	
 
-
-</body>
-</html> 
+		<div class="mdui-container">
+			<h1>Weather</h1>
+			<div class="mdui-textfield">
+				<div class="mdui-row">
+					<div class="mdui-col-xs-12 mdui-col-sm-8">
+						<i class="mdui-icon material-icons">&#xe0c8;</i>
+  					<label class="mdui-textfield-label">Location</label>
+  					<input class="mdui-textfield-input" type="text" value="Bayside" placeholder="Enter your location" id="location" onkeypress="if(event.keyCode==13) {weatherBtn.click();return false;}" required/>
+					</div>
+					<div class="mdui-col-xs-6 mdui-col-sm-4">
+						<i class="mdui-icon material-icons">&#xe8df;</i>
+  					<label class="mdui-textfield-label">Days</label>
+						<input class="mdui-textfield-input" type="text" value="7" placeholder="Enter 1-16" id="cnt" onkeypress="if(event.keyCode==13) {weatherBtn.click();return false;}" required/>
+					</div>
+				</div>
+			</div>
+			<button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent" onclick="showWeather()" id="weatherBtn"><i class="mdui-icon material-icons">&#xe1b7;</i></button>
+			
+			<div class="mdui-panel" mdui-panel>
+  			<div class="mdui-panel-item mdui-panel-item-open">
+    			<div class="mdui-panel-item-header">
+      			<div class="mdui-panel-item-title">Current Weather</div>
+      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+    			</div>
+    			<div class="mdui-panel-item-body" id="current">
+    			</div>
+  			</div>
+			</div>
+			<div class="mdui-panel" mdui-panel>
+  			<div class="mdui-panel-item mdui-panel-item-open">
+    			<div class="mdui-panel-item-header">
+      			<div class="mdui-panel-item-title">Map</div>
+      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+    			</div>
+    			<div class="mdui-panel-item-body" id="googleMap">
+    			</div>
+  			</div>
+			</div>
+			<div class="mdui-panel" mdui-panel>
+  			<div class="mdui-panel-item mdui-panel-item-open">
+    			<div class="mdui-panel-item-header">
+      			<div class="mdui-panel-item-title">Daily Weather Forecast</div>
+      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+    			</div>
+					<div class="mdui-panel-item-body">
+    				<div id="daily"></div>
+					</div>
+  			</div>
+			</div>
+		</div>
+	</body>
+</html>
