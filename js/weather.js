@@ -5,11 +5,11 @@ function showWeather(){
 	daily(location,key);
 }
 function current(location,key){
-	$.getJSON("http://api.openweathermap.org/data/2.5/weather?units=metric&q="+location+key, function(data){
+	$.getJSON("https://api.openweathermap.org/data/2.5/weather?units=metric&q="+location+key, function(data){
 		var name=data.name;
 		var coordsLat=data.coord.lat
 		var coordsLon=data.coord.lon;
-		var icon=data.weather[0].icon;//http://openweathermap.org/img/w/10d.png
+		var icon=data.weather[0].icon;//https://openweathermap.org/img/w/10d.png
 		var descr=data.weather[0].description;
 		var temp=data.main.temp;
 		var humidity=data.main.humidity;
@@ -18,7 +18,7 @@ function current(location,key){
 		var build = "";
     build += "<div class='mdui-card-primary'>";
 		build += "<div class='mdui-card-primary-title'>"+name+ " ( " +coordsLat+ " , " +coordsLon+ " )</div></div>";
-		build += "<div class='mdui-card-content' style='height: 100%;'><img src='http://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
+		build += "<div class='mdui-card-content' style='height: 100%;'><img src='https://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
 		build += "<p>";
 		build += "Description:"+descr+"<br>";	
 		build += "Tempture:"+temp+" deg C<br>";
@@ -33,11 +33,11 @@ function current(location,key){
 }
 function daily(location,key){ 
 	var cnt = parseInt(document.getElementById("cnt").value);
-	$.getJSON("http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt="+cnt+"&q="+location+key, function(data){
+	$.getJSON("https://api.openweathermap.org/data/2.5/forecast/daily?units=metric&cnt="+cnt+"&q="+location+key, function(data){
 		console.log(data);
 		var build = "";
 		for(var i=0; i<data.list.length; i++){
-			var icon=data.list[i].weather[0].icon;//http://openweathermap.org/img/w/10d.png
+			var icon=data.list[i].weather[0].icon;//https://openweathermap.org/img/w/10d.png
 			var descr=data.list[i].weather[0].description;
 			var temp=data.list[i].temp.day;
 			var d=new Date(data.list[i].dt*1000);
@@ -54,7 +54,7 @@ function daily(location,key){
       build += "<div class='mdui-card-primary'>";
 			build += "<div class='mdui-card-primary-title'>Day: "+(i+1)+"</div>";
 			build += "<div class='mdui-card-primary-subtitle'>Date: "+(d.getMonth()+1)+" / "+ d.getDate()+ " / "+d.getFullYear()+" "+weekday[d.getDay()]+"</div></div>";
-			build += "<div class='mdui-card-content'><img src='http://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
+			build += "<div class='mdui-card-content'><img src='https://openweathermap.org/img/w/"+icon+".png' style='height:100px'><br>";
 			build += "<p>";
 			build += "Description:"+descr+"<br>";	
 			build += "Tempture:"+temp+" deg C<br>";
