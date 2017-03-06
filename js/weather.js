@@ -1,3 +1,9 @@
+/** 
+ * Copyright © 2017 Sophia Xu,Junyi Wu, Kay Lin, Qin Lin, Junning Quan
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the MIT License. See the LICENSE file for more details.
+*/
+
 function showWeather(){
 	var location =document.getElementById("location").value
 	var key="&appid=8eefe0f1bea8271fbe52facfda36ee3a";
