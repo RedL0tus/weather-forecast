@@ -27,13 +27,13 @@
 		</header>
 
 		<div class="mdui-drawer" id="main-drawer">
-  		<div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
-    		<div class="mdui-collapse-item mdui-list-item-active">
-      		<div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+			<div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+				<div class="mdui-collapse-item mdui-list-item-active">
+					<div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
 						<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe2bd;</i>
-        		<div class="mdui-list-item-content">Weather</div>
+						<div class="mdui-list-item-content">Weather</div>
 					</div>
-      	</div>
+				</div>
 			</div>
 		</div>
 
@@ -43,48 +43,48 @@
 				<div class="mdui-row">
 					<div class="mdui-col-xs-12 mdui-col-sm-8">
 						<i class="mdui-icon material-icons">&#xe0c8;</i>
-  					<label class="mdui-textfield-label">Location</label>
-  					<input class="mdui-textfield-input" type="text" value="Bayside" placeholder="Enter your location" id="location" onkeypress="if(event.keyCode==13) {weatherBtn.click();return false;}" required/>
+						<label class="mdui-textfield-label">Location</label>
+						<input class="mdui-textfield-input" type="text" value="Bayside" placeholder="Enter your location" id="location" onkeypress="if(event.keyCode==13) {weatherBtn.click();return false;}" required/>
 					</div>
 					<div class="mdui-col-xs-6 mdui-col-sm-4">
 						<i class="mdui-icon material-icons">&#xe8df;</i>
-  					<label class="mdui-textfield-label">Days</label>
+						<label class="mdui-textfield-label">Days</label>
 						<input class="mdui-textfield-input" type="text" value="7" placeholder="Enter 1-16" id="cnt" onkeypress="if(event.keyCode==13) {weatherBtn.click();return false;}" required/>
 					</div>
 				</div>
 			</div>
 			<button class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent" onclick="showWeather()" id="weatherBtn"><i class="mdui-icon material-icons">&#xe1b7;</i></button>
-			
+
 			<div class="mdui-panel" mdui-panel>
-  			<div class="mdui-panel-item mdui-panel-item-open">
-    			<div class="mdui-panel-item-header">
-      			<div class="mdui-panel-item-title">Current Weather</div>
-      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
-    			</div>
-    			<div class="mdui-panel-item-body" id="current">
-    			</div>
-  			</div>
+				<div class="mdui-panel-item mdui-panel-item-open">
+					<div class="mdui-panel-item-header">
+						<div class="mdui-panel-item-title">Current Weather</div>
+						<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+					</div>
+					<div class="mdui-panel-item-body" id="current">
+					</div>
+				</div>
 			</div>
 			<div class="mdui-panel" mdui-panel>
-  			<div class="mdui-panel-item mdui-panel-item-open">
-    			<div class="mdui-panel-item-header">
-      			<div class="mdui-panel-item-title">Map</div>
-      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
-    			</div>
-    			<div class="mdui-panel-item-body" id="googleMap">
-    			</div>
-  			</div>
+				<div class="mdui-panel-item mdui-panel-item-open">
+					<div class="mdui-panel-item-header">
+						<div class="mdui-panel-item-title">Map</div>
+						<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+					</div>
+					<div class="mdui-panel-item-body" id="googleMap">
+					</div>
+				</div>
 			</div>
 			<div class="mdui-panel" mdui-panel>
-  			<div class="mdui-panel-item mdui-panel-item-open">
-    			<div class="mdui-panel-item-header">
-      			<div class="mdui-panel-item-title">Daily Weather Forecast</div>
-      			<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
-    			</div>
+				<div class="mdui-panel-item mdui-panel-item-open">
+					<div class="mdui-panel-item-header">
+						<div class="mdui-panel-item-title">Daily Weather Forecast</div>
+						<i class="mdui-panel-item-arrow mdui-icon material-icons">&#xe313;</i>
+					</div>
 					<div class="mdui-panel-item-body">
 						<div id="daily"></div>
 					</div>
-  			</div>
+				</div>
 			</div>
 		</div>
 		<div class="mdui-card mdui-color-theme">
